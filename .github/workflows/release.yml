@@ -4,7 +4,7 @@ name: Release (signed macOS .app + DMG)
 # from the commit, never typed (RFD66606-2312, "release tags are go
 # pseudo-versions"): v0.0.0-<UTC committer time YYYYMMDDhhmmss>-<12 hex>.
 #
-#   gh workflow run release.yml -R V-Sekai-fire/TOOL_geodesiac_path
+#   gh workflow run release.yml -R V-Sekai-fire/interactor-geodesiac-path
 #
 # The macOS .app is signed (Developer ID, hardened runtime) and notarized
 # with rcodesign (indygreg/apple-platform-rs) on a Linux runner -- no
@@ -226,7 +226,7 @@ jobs:
           client-id: ${{ secrets.PERSONA_APP_ID }}
           private-key: ${{ secrets.PERSONA_APP_PRIVATE_KEY }}
           owner: V-Sekai-fire
-          repositories: TOOL_geodesiac_path
+          repositories: ${{ github.event.repository.name }}
       - name: Create tag and release, attach the DMG
         env:
           TAG: ${{ needs.tag.outputs.tag }}
